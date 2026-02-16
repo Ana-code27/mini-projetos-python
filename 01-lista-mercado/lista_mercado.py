@@ -4,9 +4,23 @@ def mostrar_menu():
     print('3. Ver lista')
     print('4. Sair')
 
+
+def pedir_numeros (mensagem):
+    while True:
+        try:
+            valor = int(input(mensagem))
+            if valor < 0:
+                print('Por favor, digite um número positivo.')
+            else:
+                return valor
+        except ValueError:
+            print('-------------------------------------')
+            print('Entrada inválida. Por favor, digite um número inteiro.')
+            print('-------------------------------------')
+ 
 def adicionar_item(compras):
     item = input('Digite um item: ').lower()
-    qtd = int(input('Quantidade: '))
+    qtd = pedir_numeros('Quantidade: ')
     if item in compras:
         compras[item] += qtd
     else:
@@ -23,7 +37,7 @@ def remover_item(compras):
     else:
         remove_item = input('Digite o item que deseja remover: ').lower()
         if remove_item in compras:
-            qtd = int(input('Quantidade a remover: '))
+            qtd = pedir_numeros('Quantidade a remover: ')
             if qtd >= compras[remove_item]:
                 del compras[remove_item]
                 print(f'Produto {remove_item} removido totalmente!')
@@ -48,7 +62,7 @@ def main():
     compras = {}
     while True:
         mostrar_menu()
-        resposta = int(input('Digite uma opção: '))
+        resposta = pedir_numeros('Digite a opção desejada: ')
         
         if resposta == 1:
             adicionar_item(compras)
@@ -62,5 +76,7 @@ def main():
             print('-------------------------------------')
             break
         else:
-            print('--- OPÇÃO INVÁLIDA. TENTE NOVAMENTE!! ---')
+            print('-------------------------------------')
+            print('Entrada inválida. Por favor, digite uma opção válida')
+            print('-------------------------------------')
 main()
